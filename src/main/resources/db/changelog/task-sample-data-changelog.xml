@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="3" author="odemirel">
+        <insert tableName="tasks">
+            <column name="title">Complete project documentation</column>
+            <column name="description">Write detailed documentation for the entire project</column>
+            <column name="long_description">Create comprehensive documentation covering all aspects of the project including architecture, API endpoints, and database schema</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Fix navigation bug</column>
+            <column name="description">Address the navigation issue in the mobile app</column>
+            <column name="long_description">Investigate and fix the bug where navigation drawer doesn't close properly after selecting an item on Android devices</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement user authentication</column>
+            <column name="description">Create login and signup functionality</column>
+            <column name="long_description">Implement secure user authentication with JWT tokens, password recovery, and email verification</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Design landing page</column>
+            <column name="description">Create a new landing page design</column>
+            <column name="long_description">Design an attractive, responsive landing page that highlights key features and encourages sign-ups</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Add unit tests</column>
+            <column name="description">Increase test coverage for core modules</column>
+            <column name="long_description">Write comprehensive unit tests for all critical components to ensure at least 80% code coverage</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create CI/CD pipeline</column>
+            <column name="description">Set up automated build and deployment</column>
+            <column name="long_description">Implement a CI/CD pipeline using GitHub Actions for automatic testing, building, and deployment to staging and production environments</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Optimize database queries</column>
+            <column name="description">Improve performance of slow database operations</column>
+            <column name="long_description">Analyze and optimize the most resource-intensive database queries to reduce latency and improve overall application performance</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Update dependencies</column>
+            <column name="description">Update all libraries to latest versions</column>
+            <column name="long_description">Review and update all project dependencies to their latest stable versions, ensuring compatibility and addressing security vulnerabilities</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create user dashboard</column>
+            <column name="description">Design and implement user dashboard</column>
+            <column name="long_description">Develop a comprehensive dashboard displaying user activity, statistics, and personalized recommendations</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement dark mode</column>
+            <column name="description">Add dark mode theme option</column>
+            <column name="long_description">Create a complete dark mode theme that respects user system preferences and allows manual toggling</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Setup error monitoring</column>
+            <column name="description">Integrate error tracking service</column>
+            <column name="long_description">Set up a comprehensive error tracking and monitoring solution to catch and report runtime errors in production</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create API documentation</column>
+            <column name="description">Document all API endpoints</column>
+            <column name="long_description">Create detailed documentation for all API endpoints including request/response formats, authentication requirements, and example usage</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement data export feature</column>
+            <column name="description">Allow users to export their data</column>
+            <column name="long_description">Create functionality for users to export their data in various formats (CSV, JSON, PDF) for personal backup or migration</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Add search functionality</column>
+            <column name="description">Implement global search feature</column>
+            <column name="long_description">Create a powerful search feature allowing users to search across all content with filtering and sorting options</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Optimize image loading</column>
+            <column name="description">Improve image loading performance</column>
+            <column name="long_description">Implement lazy loading, progressive image loading, and optimized caching strategies to improve performance on slow connections</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create user onboarding flow</column>
+            <column name="description">Design first-time user experience</column>
+            <column name="long_description">Develop an intuitive onboarding process to guide new users through key features and initial setup</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement multi-language support</column>
+            <column name="description">Add internationalization</column>
+            <column name="long_description">Implement comprehensive internationalization support with translations for at least 5 major languages</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Refactor legacy code</column>
+            <column name="description">Modernize outdated codebase sections</column>
+            <column name="long_description">Identify and refactor legacy code to follow current best practices and improve maintainability</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Setup crash reporting</column>
+            <column name="description">Implement automated crash reporting</column>
+            <column name="long_description">Configure a system to automatically capture and report application crashes with detailed context information</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create user profile page</column>
+            <column name="description">Design and implement profile UI</column>
+            <column name="long_description">Build a comprehensive user profile interface allowing users to view and edit their personal information</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement notifications system</column>
+            <column name="description">Add in-app and push notifications</column>
+            <column name="long_description">Create a complete notification system supporting in-app alerts, email digests, and push notifications with user preference management</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Conduct security audit</column>
+            <column name="description">Review application for security vulnerabilities</column>
+            <column name="long_description">Perform comprehensive security assessment including code review, dependency scanning, and penetration testing</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Add admin dashboard</column>
+            <column name="description">Create administration interface</column>
+            <column name="long_description">Develop a robust admin interface allowing privileged users to manage content, users, and system settings</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Optimize JavaScript bundle</column>
+            <column name="description">Reduce JavaScript bundle size</column>
+            <column name="long_description">Analyze and optimize the JavaScript bundle size through code splitting, tree shaking, and removing unused dependencies</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement analytics tracking</column>
+            <column name="description">Set up user behavior tracking</column>
+            <column name="long_description">Integrate analytics to track user interactions, feature usage, and conversion rates while respecting privacy regulations</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Improve accessibility</column>
+            <column name="description">Make application WCAG compliant</column>
+            <column name="long_description">Review and enhance accessibility features to ensure compliance with WCAG 2.1 standards and better support for assistive technologies</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Setup backup system</column>
+            <column name="description">Implement automated database backups</column>
+            <column name="long_description">Create a robust backup system with automated daily backups, integrity verification, and simplified restoration process</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create email templates</column>
+            <column name="description">Design responsive email templates</column>
+            <column name="long_description">Design and implement responsive, branded email templates for all system notifications and marketing communications</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement social sharing</column>
+            <column name="description">Add social media integration</column>
+            <column name="long_description">Create functionality for users to easily share content on social media platforms with customizable previews</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Update privacy policy</column>
+            <column name="description">Review and update legal documents</column>
+            <column name="long_description">Review and update privacy policy and terms of service to ensure compliance with latest regulations</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create mobile app version</column>
+            <column name="description">Develop native mobile applications</column>
+            <column name="long_description">Build native mobile applications for iOS and Android with feature parity to the web application</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement rate limiting</column>
+            <column name="description">Add API request throttling</column>
+            <column name="long_description">Implement rate limiting for API endpoints to prevent abuse and ensure fair resource allocation</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create feedback system</column>
+            <column name="description">Add user feedback collection</column>
+            <column name="long_description">Develop a system for collecting and managing user feedback, feature requests, and bug reports</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Optimize SEO</column>
+            <column name="description">Improve search engine visibility</column>
+            <column name="long_description">Enhance SEO through improved metadata, semantic HTML, sitemap generation, and performance optimizations</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement data archiving</column>
+            <column name="description">Create system for archiving old data</column>
+            <column name="long_description">Develop a strategy for archiving and purging old data to maintain database performance while preserving important information</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Add premium subscription features</column>
+            <column name="description">Implement paid subscription options</column>
+            <column name="long_description">Develop premium features and payment integration for subscription-based revenue model</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create offline mode</column>
+            <column name="description">Add support for offline usage</column>
+            <column name="long_description">Implement offline functionality allowing users to access and modify data without an internet connection, with background synchronization</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Implement data visualization</column>
+            <column name="description">Add charts and graphs for data</column>
+            <column name="long_description">Create interactive data visualizations to help users understand and analyze their data more effectively</column>
+            <column name="completed">false</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Setup load testing</column>
+            <column name="description">Test application under heavy load</column>
+            <column name="long_description">Implement automated load testing to verify application performance and stability under high user loads</column>
+            <column name="completed">true</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="title">Create developer documentation</column>
+            <column name="description">Document codebase for developers</column>
+            <column name="long_description">Create comprehensive internal documentation covering architecture, key components, and development workflows to facilitate onboarding of new developers</column>
+            <column name="completed">false</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog> 

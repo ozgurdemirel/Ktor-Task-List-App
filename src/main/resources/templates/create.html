@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/app :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Create New Task</title>
+</head>
+<body>
+    <main>
+        <h1>Create Task</h1>
+        
+        <div class="ui segment">
+            <a href="/tasks" class="ui labeled icon button">
+                <i class="left arrow icon"></i>
+                Back to Tasks
+            </a>
+        </div>
+
+        <form action="/tasks" method="post" class="ui form">
+            <div class="field" th:classappend="${errors != null && errors.containsKey('title') ? 'error' : ''}">
+                <label for="title">Task Title</label>
+                <input type="text" id="title" name="title" placeholder="Enter task title" required th:value="${task != null ? task.title : ''}">
+                <div th:if="${errors != null && errors.containsKey('title')}" class="ui pointing red basic label" th:text="${errors.get('title')}"></div>
+            </div>
+
+            <div class="field" th:classappend="${errors != null && errors.containsKey('description') ? 'error' : ''}">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="2" placeholder="Enter brief description" required th:text="${task != null ? task.description : ''}"></textarea>
+                <div th:if="${errors != null && errors.containsKey('description')}" class="ui pointing red basic label" th:text="${errors.get('description')}"></div>
+            </div>
+
+            <div class="field">
+                <label for="longDescription">Long Description</label>
+                <textarea id="longDescription" name="longDescription" rows="4" placeholder="Enter detailed description"></textarea>
+            </div>
+
+            <div class="field">
+                <div class="ui checkbox disabled">
+                    <input type="checkbox" id="completed" name="completed" disabled>
+                    <label>Task Completed</label>
+                </div>
+                <div class="ui pointing label">
+                    New tasks are created as pending by default. You can mark them as completed later.
+                </div>
+            </div>
+
+            <button type="submit" class="ui primary button">
+                <i class="save icon"></i>
+                Create Task
+            </button>
+        </form>
+    </main>
+</body>
+</html> 

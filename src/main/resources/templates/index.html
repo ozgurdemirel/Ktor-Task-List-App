@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/app :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Tasks - Task List</title>
+</head>
+<body>
+<div class="ui container" style="margin-top: 20px;">
+    <main>
+        <h1>All Tasks</h1>
+        
+        <div class="ui segment" style="text-align: center;">
+            <a href="/tasks/create" class="ui primary button">
+                <i class="plus icon"></i> Add Task
+            </a>
+        </div>
+
+        <div th:if="${tasks.isEmpty()}" class="ui info message">
+            <div class="header">No Tasks</div>
+            <p>There are no tasks available. Create a new one!</p>
+        </div>
+
+        <table class="ui celled table" th:if="${!tasks.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td>
+                        <a th:href="${'/tasks/' + task.id}" class="header"
+                           th:style="${task.completed ? 'text-decoration: line-through;' : ''}">
+                            <span th:text="${task.title}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="ui label" th:classappend="${task.completed ? 'green' : 'orange'}"
+                             th:text="${task.completed ? 'Completed' : 'Pending'}"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="ui center aligned container" th:if="${tasks.size() > 0 && totalPages > 1}">
+            <div th:replace="~{fragments/pagination :: pagination(${currentPage}, ${totalPages})}"></div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

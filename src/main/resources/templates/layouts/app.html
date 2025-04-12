@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <title th:replace="${title}">Tasks - Default Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Fomantic UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css">
+    
+    <!-- jQuery required for Fomantic UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Fomantic UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+    
+    <!-- AlpineJS for interactivity -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+<div class="ui container" style="margin-top: 2em;">
+
+    <!-- App Header -->
+    <div class="ui segment">
+        <div class="ui left floated header">
+           Özgür Demirel ₺ Ktor Task List App
+        </div>
+        <div class="ui clearing divider"></div>
+    </div>
+    
+    <div x-data="{ flash: true }">
+        <!-- Display success message if available -->
+        <div th:if="${success != null}" x-show="flash"
+             class="ui positive message"
+             role="alert">
+            <i class="close icon" @click="flash = false"></i>
+            <div class="content" th:text="${success}"></div>
+        </div>
+
+        <!-- Display error message if available -->
+        <div th:if="${error != null}" x-show="flash"
+             class="ui negative message"
+             role="alert">
+            <i class="close icon" @click="flash = false"></i>
+            <div class="content" th:text="${error}"></div>
+        </div>
+
+        <!-- Main content block -->
+        <div th:replace="${content}"></div>
+    </div>
+</div>
+</body>
+</html>

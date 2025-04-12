@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="pagination(currentPage, totalPages)" th:with="page=${currentPage + 0}, pages=${totalPages + 0}">
+        <div class="ui pagination menu">
+            <!-- Previous page link -->
+            <a th:if="${page > 1}" th:href="${'/tasks?page=' + (page - 1)}"
+               class="item">
+                <i class="angle left icon"></i> Previous
+            </a>
+            <div th:unless="${page > 1}"
+                  class="disabled item">
+                <i class="angle left icon"></i> Previous
+            </div>
+
+            <!-- Page links -->
+            <th:block th:each="i : ${#numbers.sequence(1, pages)}">
+                <a th:if="${i == page}"
+                   class="active item" th:text="${i}">1</a>
+                <a th:unless="${i == page}"
+                   th:href="${'/tasks?page=' + i}"
+                   class="item"
+                   th:text="${i}">1</a>
+            </th:block>
+
+            <!-- Next page link -->
+            <a th:if="${page < pages}" th:href="${'/tasks?page=' + (#int.plus(page+1))}"
+               class="item">
+                Next <i class="angle right icon"></i>
+            </a>
+            <div th:unless="${page < pages}"
+                  class="disabled item">
+                Next <i class="angle right icon"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

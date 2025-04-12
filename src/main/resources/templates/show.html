@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/app :: layout(~{::title}, ~{::main})}">
+<head>
+    <title th:text="'Task: ' + ${task.title}">Task Details</title>
+</head>
+<body>
+    <main>
+        <div class="ui segment">
+            <a href="/tasks" class="ui labeled icon button">
+                <i class="left arrow icon"></i>
+                Back to Tasks
+            </a>
+        </div>
+
+        <div class="ui raised segment">
+            <h2 class="ui header" th:style="${task.completed ? 'text-decoration: line-through;' : ''}"
+               th:text="${task.title}">Title</h2>
+
+            <div class="ui divider"></div>
+
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class="ui small header">Status:</div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="ui label"
+                         th:classappend="${task.completed ? 'green' : 'orange'}"
+                         th:text="${task.completed ? 'Completed' : 'Pending'}">Status</div>
+                </div>
+            </div>
+
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class="ui small header">Description:</div>
+                </div>
+                <div class="twelve wide column">
+                    <p th:text="${task.description}">Description</p>
+                </div>
+            </div>
+
+            <div class="ui grid" th:if="${task.longDescription != null && !task.longDescription.isEmpty()}">
+                <div class="four wide column">
+                    <div class="ui small header">Long Description:</div>
+                </div>
+                <div class="twelve wide column">
+                    <p th:text="${task.longDescription}">Long Description</p>
+                </div>
+            </div>
+
+            <div class="ui divider"></div>
+
+            <div class="ui tiny gray text">
+                <div>
+                    <span>Created: </span>
+                    <span th:text="${#timeAgo.format(task.createdAt)}">Created date</span>
+                    <span class="timestamp-container" style="display: none;">
+                        (<span class="local-time"
+                           th:attr="data-utc=${#timeAgo.toISOString(task.createdAt)}">UTC date</span>)
+                    </span>
+                </div>
+                <div th:if="${task.updatedAt != null}">
+                    <span>Last updated: </span>
+                    <span th:text="${#timeAgo.format(task.updatedAt)}">Updated date</span>
+                    <span class="timestamp-container" style="display: none;">
+                        (<span class="local-time"
+                           th:attr="data-utc=${#timeAgo.toISOString(task.updatedAt)}">UTC date</span>)
+                    </span>
+                </div>
+            </div>
+
+            <div class="ui divider"></div>
+
+            <div class="ui buttons" style="gap: 8px;">
+                <a th:href="${'/tasks/' + task.id + '/edit'}" class="ui blue button">
+                    <i class="edit icon"></i> Edit
+                </a>
+
+                <form th:action="${'/tasks/' + task.id + '/toggle'}" method="post" style="display: inline;">
+                    <button type="submit" class="ui button"
+                            th:classappend="${task.completed ? 'orange' : 'green'}"
+                            th:text="${task.completed ? 'Mark as Pending' : 'Mark as Completed'}">Toggle Status</button>
+                </form>
+
+                <form th:action="${'/tasks/' + task.id + '/delete'}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                    <button type="submit" class="ui negative button">
+                        <i class="trash icon"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

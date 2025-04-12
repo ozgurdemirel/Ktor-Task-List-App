@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/app :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Edit Task</title>
+</head>
+<body>
+    <main>
+        <div class="ui segment">
+            <a href="/tasks" class="ui labeled icon button">
+                <i class="left arrow icon"></i>
+                Back to Tasks
+            </a>
+        </div>
+
+        <form th:action="@{'~/tasks/'+${task.id}+'/edit'}" method="post" class="ui form">
+            <div class="field" th:classappend="${errors != null && errors.containsKey('title') ? 'error' : ''}">
+                <label for="title">Task Title</label>
+                <input type="text" id="title" name="title" th:value="${task.title}" placeholder="Enter task title">
+                <div th:if="${errors != null && errors.containsKey('title')}" class="ui pointing red basic label" th:text="${errors.get('title')}"></div>
+            </div>
+
+            <div class="field" th:classappend="${errors != null && errors.containsKey('description') ? 'error' : ''}">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="2" th:text="${task.description}" placeholder="Enter brief description" required></textarea>
+                <div th:if="${errors != null && errors.containsKey('description')}" class="ui pointing red basic label" th:text="${errors.get('description')}"></div>
+            </div>
+
+            <div class="field">
+                <label for="longDescription">Long Description</label>
+                <textarea id="longDescription" name="longDescription" rows="4" th:text="${task.longDescription}" placeholder="Enter detailed description"></textarea>
+            </div>
+
+            <div class="field">
+                <div class="ui checkbox">
+                    <input type="checkbox" id="completed" name="completed" th:checked="${task.completed}">
+                    <label>Task Completed</label>
+                </div>
+            </div>
+
+            <div class="ui buttons">
+                <button type="submit" class="ui positive button">
+                    <i class="save icon"></i>
+                    Update Task
+                </button>
+                <div class="or"></div>
+                <a th:href="@{'~/tasks/'+${task.id}}" class="ui button">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </main>
+</body>
+</html> 
