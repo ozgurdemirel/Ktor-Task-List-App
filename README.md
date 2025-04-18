@@ -1,163 +1,134 @@
-# Ktor Task Application
+# Task List App with Ktor 🚀
 
-A task management web application built with Ktor, Kotlin, and Exposed SQL framework, following Hexagonal Architecture principles. This application allows users to create, view, edit, and delete tasks through a web interface.
+This project is an educational example demonstrating how to develop a simple task list (to-do list) application with CRUD (Create, Read, Update, Delete) functionality using the [Ktor](https://ktor.io/) web framework. It combines the power of the Kotlin language and the flexibility of Ktor, designed for those looking to get started with building modern web applications or APIs. It also demonstrates how to manage database schema using [Liquibase](https://www.liquibase.org/) integration.
 
-## Features
+## 📝 Overview
 
-* **Task Management**: Full CRUD (Create, Read, Update, Delete) operations for tasks
-* **Rich Task Data**: Tasks include title, description, optional long-form description, and completion status
-* **Web Interface**: Clean UI built with Thymeleaf templates, Fomantic UI, and Alpine.js for interactivity
-* **Pagination**: Browse tasks efficiently with pagination support on the main task list page
-* **Database Integration**: Utilizes Exposed ORM for database operations. Supports H2 for development/testing and PostgreSQL for production. Uses HikariCP for connection pooling
-* **Database Migrations**: Automatic database schema management using Liquibase
-* **Input Validation**: Server-side validation for task creation and updates
-* **Hexagonal Architecture**: Code structured with distinct adapters (web, templates), application core (services), and domain/infrastructure (repository, models, DTOs)
-* **Testing**: Includes unit tests (Service, Repository) and integration tests (Routes, Application)
+This application allows users to add tasks, view existing tasks, update them, and delete them. Its main purpose is to explain the fundamental concepts of Ktor (Routing, Request/Response Handling, Content Negotiation, etc.) and how to structure a simple web application or RESTful API through a practical example. Database schema changes are managed using Liquibase.
 
-## Tech Stack
+## 🎯 Purpose and Target Audience
 
-| Technology            | Purpose                                            |
-|:----------------------|:---------------------------------------------------|
-| **Framework**         |                                                    |
-| Ktor                  | Kotlin asynchronous web framework                  |
-| **Language**          |                                                    |
-| Kotlin                | Primary programming language                        |
-| **Database**          |                                                    |
-| Exposed               | Kotlin SQL framework/ORM                           |
-| H2 Database           | In-memory database for development/testing         |
-| PostgreSQL            | Relational database for production                 |
-| HikariCP              | High-performance JDBC connection pool              |
-| Liquibase             | Database schema version control                    |
-| **Templating**        |                                                    |
-| Thymeleaf             | Server-side Java/Kotlin template engine            |
-| Thymeleaf Layout Dialect | For creating reusable layout templates          |
-| **Serialization**     |                                                    |
-| kotlinx.serialization | Kotlin multiplatform / JSON serialization          |
-| **Frontend**          |                                                    |
-| Fomantic UI           | CSS Framework (fork of Semantic UI)                |
-| Alpine.js             | Minimalist JavaScript framework for interactivity  |
-| jQuery                | JavaScript library (required by Fomantic UI)       |
-| **Build & Testing**   |                                                    |
-| Gradle                | Build automation tool                              |
-| MockK                 | Mocking library for Kotlin                         |
-| Ktor Testing          | Utilities for testing Ktor applications            |
-| JSoup                 | Java HTML Parser (for testing HTML content)        |
-| **Logging**           |                                                    |
-| Logback               | Logging framework                                  |
-| **Containerization**  |                                                    |
-| Docker                | Containerization platform                          |
-| Docker Compose        | Tool for defining and running multi-container apps |
+The main goals of this project are:
 
-## Project Structure
+1.  **Introduction to Ktor:** To demonstrate the basic building blocks and usage of the Ktor framework.
+2.  **Backend Development with Kotlin:** To showcase how the Kotlin language can be used for developing server-side applications.
+3.  **RESTful API Design:** To teach how to design and implement basic API endpoints for simple CRUD operations.
+4.  **Database Schema Management:** To show how to version and manage database changes alongside code using Liquibase.
+5.  **Basic Web Application Flow:** To understand the process from receiving a web request to processing it and returning a response, specifically within Ktor.
 
-```
-src/
-├── main/
-│   ├── kotlin/         # Application source code
-│   │   ├── adapters/   # Hexagonal architecture adapters
-│   │   ├── application/ # Application services
-│   │   ├── domain/     # Domain models and interfaces
-│   │   ├── infrastructure/ # Infrastructure implementations
-│   │   └── Application.kt # Main entry point
-│   └── resources/
-│       ├── application.conf # Ktor configuration
-│       ├── db/
-│       │   └── changelog/ # Liquibase migration files
-│       ├── logback.xml   # Logging configuration
-│       └── templates/    # Thymeleaf HTML templates
-└── test/                # Test source code
+**Target Audience:**
+
+* Developers new to learning Ktor.
+* Individuals interested in web development with Kotlin.
+* Anyone looking for a simple REST API example.
+* Developers wanting to learn tools like Liquibase for database schema management.
+* Students and developers aiming to understand the fundamental principles of web frameworks.
+
+## 🛠️ Technologies Used
+
+The main technologies used in this project are:
+
+* **[Kotlin](https://kotlinlang.org/):** The primary programming language used for developing the application.
+* **[Ktor](https://ktor.io/):** An asynchronous and lightweight web framework.
+* **[Gradle](https://gradle.org/):** The build automation tool used for dependency management and build processes.
+* **[Liquibase](https://www.liquibase.org/):** An open-source tool used for managing and versioning database schema changes.
+* **[Likely] Database:** A database suited to the project's needs, such as **H2**, **PostgreSQL**, **MySQL**, etc.
+* **[Likely] Database Access:** A library/technology like **[Exposed](https://github.com/JetBrains/Exposed)** or **JDBC**.
+* **[Likely] JSON Serialization:** A library like **[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)** or **Jackson** for API usage.
+
+## 💾 Database Management: Liquibase Integration
+
+**Liquibase** is used in this project for the evolution and management of the database schema. Liquibase allows us to track database changes (table creation, adding columns, data updates, etc.) in version control systems (like Git), just like code.
+
+**Why is it Effective?**
+
+* **Version Control:** Database schema changes are versioned along with the codebase. It's clear who made which change and when.
+* **Automation:** Database updates can be applied automatically during application startup or within CI/CD pipelines. This reduces errors caused by manual database updates.
+* **Consistency:** Ensures the database schema is consistent across different environments (local machine, test server, production).
+* **Rollback:** By defining rollback scripts for changes, it becomes easier to revert the database to a previous stable state in case of issues.
+* **Team Collaboration:** Facilitates managing conflicts and incompatibilities when multiple developers work on the database.
+
+**How is it Used (Example)?**
+
+In Liquibase, changes are typically defined in `changelog` files (which can be in XML, YAML, JSON, or SQL format). A master `changelog` file (like `db.changelog-master.xml`) includes or references other specific change files (like `001-create-tasks-table.xml`, `002-add-status-column.sql`).
+
+For instance, you might find a structure like this under `src/main/resources/db/changelog/`:
+
+```db/changelog/
+├── db.changelog-master.xml
+├── changesets/
+│   ├── 001-initial-schema.xml
+│   └── 002-add-completed-flag.sql
 ```
 
-## Getting Started
+When the application starts (or the relevant Gradle task is executed), Liquibase checks its tracking table in the target database and sequentially runs any `changesets` that have not yet been applied, bringing the database schema up to the current version.
 
-### Prerequisites
+## ✨ Features
 
-* JDK 17 or higher
-* Gradle 8.4 or higher
-* PostgreSQL (for production deployment)
+* **Add Task:** Create new tasks.
+* **List Tasks:** View all existing tasks.
+* **Update Task:** Modify the content or status of an existing task.
+* **Delete Task:** Remove a specific task from the list.
 
-### Development Setup
+*(Depending on the application structure, it might offer an HTML interface or only API endpoints.)*
 
-1. Clone the repository:
+## 🚀 Setup and Running
 
-2. Run the application using the Gradle wrapper with the embedded H2 database:
-   ```bash
-   ./gradlew run
-   ```
+You can follow these steps to run the project on your local machine:
 
-3. The application will be available at `http://localhost:8080/tasks`
+1.  **Prerequisites:**
+   * [Git](https://git-scm.com/)
+   * [JDK (Java Development Kit)](https://adoptium.net/) (Version 11 or higher is usually recommended)
+   * (If not using an in-memory DB like H2) The database used by the project must be installed and running. Database connection details are typically configured in `src/main/resources/application.conf`.
 
-### Production Setup
+2.  **Clone the Project:**
+    ```bash
+    git clone [https://github.com/ozgurdemirel/Ktor-Task-List-App.git](https://github.com/ozgurdemirel/Ktor-Task-List-App.git)
+    cd Ktor-Task-List-App
+    ```
 
-1. Ensure you have a PostgreSQL database running and configured.
+3.  **Build the Project:** (Using Gradle Wrapper)
+   * Linux/macOS:
+       ```bash
+       ./gradlew build
+       ```
+   * Windows:
+       ```bash
+       gradlew.bat build
+       ```
 
-2. Set the required environment variables:
-   ```bash
-   DATABASE_ENVIRONMENT=prod
-   DATABASE_JDBC_URL=jdbc:postgresql://[host]:[port]/[database]
-   DATABASE_USER=[username]
-   DATABASE_PASSWORD=[password]
-   ```
+4.  **Prepare the Database (with Liquibase):**
+    Usually, Liquibase applies the schema automatically when the application starts for the first time. However, there might be a Gradle task to run it manually (e.g., `./gradlew updateSQL` or `./gradlew update`). Check the project's specific documentation.
 
-3. Build and run the application:
-   ```bash
-   ./gradlew buildFatJar
-   java -jar build/libs/*-fat.jar
-   ```
+5.  **Run the Application:**
+   * Linux/macOS:
+       ```bash
+       ./gradlew run
+       ```
+   * Windows:
+       ```bash
+       gradlew.bat run
+       ```
 
-### Docker Setup
+6.  **Access:**
+    The application will typically start on `http://localhost:8080` by default (The port number and database settings might be in `src/main/resources/application.conf`). You can access this address from your browser or an API testing tool (like Postman, Insomnia, etc.).
 
-The application includes full Docker support for easy deployment:
+## 📂 Project Structure (Summary)
 
-1. **Build and run with Docker Compose:**
-   ```bash
-   docker-compose up --build
-   ```
+The basic directory structure of the project is generally as follows:
 
-   This will:
-   - Build the application container
-   - Start a PostgreSQL database container
-   - Configure all necessary environment variables
-   - Make the application available at `http://localhost:8080`
+* `src/main/kotlin`: Contains the main Kotlin code for the application (Application entry point, Routing definitions, Data classes, Services, etc.).
+* `src/main/resources`: Holds configuration files (`application.conf`), Liquibase `changelog` files (`db/changelog/`), static files (CSS, JS - if any), HTML templates (if used), etc.
+* `build.gradle.kts` (or `build.gradle`): The Gradle file defining project dependencies, plugins (Ktor, Liquibase, etc.), and build settings.
 
-2. **Environment Variables**: The Docker configuration uses these default values:
-   - Database name: `ozgurclub`
-   - Database user: `ozgurclub`
-   - Database password: `password`
+## 🔌 API Endpoints (If API Focused)
 
-   Modify the `docker-compose.yml` file to change these values if needed.
+If the project primarily offers a REST API, likely endpoints might include:
 
-## Database Migrations (Liquibase)
+* `GET /tasks`: Lists all tasks.
+* `POST /tasks`: Adds a new task (Request body usually contains task details in JSON format).
+* `GET /tasks/{id}`: Retrieves a task with a specific ID.
+* `PUT /tasks/{id}`: Updates a task with a specific ID (Request body usually contains updated task details in JSON format).
+* `DELETE /tasks/{id}`: Deletes a task with a specific ID.
 
-Database schema changes are managed using Liquibase:
-
-* **Automatic Migrations**: Applied automatically on application startup
-* **Changelog Files**: Located in `src/main/resources/db/changelog/`
-
-## Web Endpoints
-
-| Path                  | Method | Description                           | Template    |
-|:----------------------|:-------|:--------------------------------------|:------------|
-| `/`                   | GET    | Redirects to `/tasks`                 | N/A         |
-| `/tasks`              | GET    | List all tasks (paginated)            | `index.html` |
-| `/tasks/create`       | GET    | Show the form to create a new task    | `create.html` |
-| `/tasks`              | POST   | Submit the new task form              | (Redirects) |
-| `/tasks/{id}`         | GET    | Show details of a specific task       | `show.html` |
-| `/tasks/{id}/edit`    | GET    | Show the form to edit a task          | `edit.html` |
-| `/tasks/{id}/edit`    | POST   | Submit the task edit form             | (Redirects) |
-| `/tasks/{id}/toggle`  | POST   | Toggle the completion status of a task| (Redirects) |
-| `/tasks/{id}/delete`  | POST   | Delete a specific task                | (Redirects) |
-
-## Building & Running (Gradle Tasks)
-
-| Task                 | Description                                      |
-|:---------------------|:-------------------------------------------------|
-| `./gradlew run`      | Run the application (uses development settings)  |
-| `./gradlew build`    | Build the project and run tests                  |
-| `./gradlew test`     | Run unit and integration tests                   |
-| `./gradlew buildFatJar` | Build a fat JAR with all dependencies         |
-
-## License
-
-This project is licensed under the Apache License - see the LICENSE file for details.
-
+*(It is recommended to check the code for the exact endpoints and request/response formats.)*
