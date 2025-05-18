@@ -1,13 +1,37 @@
 package test.config
 
-import com.odemirel.config.createDataSource
+import com.odemirel.config.LiquibaseRunner
 import com.odemirel.dto.DatabaseConfig
+import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import liquibase.Liquibase
-import liquibase.database.jvm.JdbcConnection
-import liquibase.resource.ClassLoaderResourceAccessor
 import org.jetbrains.exposed.sql.Database
 import java.util.concurrent.atomic.AtomicBoolean
+
+/**
+ * Extension for creating a HikariDataSource from a DatabaseConfig.
+ */
+object DataSourceFactoryExtension {
+    fun create(config: DatabaseConfig): HikariDataSource {
+        val dbProps = if (config.environment == "prod") config.prod else config.test
+        
+        val hikariConfig = HikariConfig().apply {
+            jdbcUrl = dbProps.jdbcUrl
+            driverClassName = dbProps.driver
+            username = dbProps.user
+            password = dbProps.password
+            
+            // Sensible defaults for tests
+            maximumPoolSize = 5
+            minimumIdle = 1
+            idleTimeout = 30_000
+            connectionTimeout = 10_000
+            validationTimeout = 5_000
+            isAutoCommit = false
+        }
+        
+        return HikariDataSource(hikariConfig)
+    }
+}
 
 /**
  * Singleton object to manage database initialization for tests.
@@ -19,10 +43,14 @@ object TestDatabaseManager {
     
     // method that accepts a DatabaseConfig directly
     fun initializeDatabaseForTestsWithConfig(dbConfig: DatabaseConfig) {
+        // Thread-safe check to ensure database is initialized only once
+        // compareAndSet atomically sets the value to true only if current value is false
+        // and returns whether the operation succeeded
         if (initialized.compareAndSet(false, true)) {
-            // Initialize database only once
-            dataSource = createDataSource(dbConfig).also { ds ->
-                runLiquibaseMigrations(ds)
+            // Initialize database only once using DataSourceFactoryExtension
+            dataSource = DataSourceFactoryExtension.create(dbConfig).also { ds ->
+                // Use the core LiquibaseRunner for migrations
+                LiquibaseRunner.run(ds)
                 Database.connect(ds)
             }
             
@@ -32,15 +60,4 @@ object TestDatabaseManager {
             })
         }
     }
-
-    private fun runLiquibaseMigrations(dataSource: HikariDataSource) {
-        dataSource.connection.use { connection ->
-            val liquibase = Liquibase(
-                "db/changelog/db.changelog-master.xml",
-                ClassLoaderResourceAccessor(),
-                JdbcConnection(connection)
-            )
-            liquibase.update("")
-        }
-    }
-} 
+}
