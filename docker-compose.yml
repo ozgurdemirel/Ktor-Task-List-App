@@ -1,29 +1,32 @@
-version: '3.8'
-
 services:
-  app:
+  web:
     build: .
     ports:
-      - "8080:8080"
+      - "8182:8080"
+    develop:
+      watch:
+        - path: .
+          action: rebuild
     environment:
-      - PORT=8080
-      - DATABASE_ENVIRONMENT=prod
-      - DATABASE_JDBC_URL=jdbc:postgresql://db:5432/ozgurclub
-      - DATABASE_USER=ozgurclub
-      - DATABASE_PASSWORD=password
+      APP_ENVIRONMENT: production
+      DATABASE_JDBC_URL: jdbc:postgresql://db:5432/postgres
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: p.postgres
     depends_on:
-      - db
-
+      db:
+        condition: service_healthy
   db:
-    image: postgres:15
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=ozgurclub
-      - POSTGRES_USER=ozgurclub
-      - POSTGRES_PASSWORD=password
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_PASSWORD: p.postgres
+      POSTGRES_ROOT_PASSWORD: root
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data: 
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
