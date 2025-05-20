@@ -15,6 +15,7 @@ application {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -35,6 +36,11 @@ dependencies {
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
+    implementation(libs.cohort.ktor)
+    implementation(libs.cohort.core)
+    implementation(libs.cohort.hikari)
+    implementation(libs.cohort.liquibase)
+    implementation(libs.cohort.logback)
     testImplementation(libs.mockk)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.jsoup)

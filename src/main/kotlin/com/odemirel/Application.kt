@@ -9,11 +9,14 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    val dataSource = DataSourceFactory.create(environment.config)
+    EnvironmentManager.initialize(environment.config)
 
+    val dataSource = DataSourceFactory.create(environment.config)
     val liquibase = LiquibaseRunner.run(dataSource)
 
     Database.connect(dataSource)
+
+    configureObservability(dataSource, liquibase)
 
     configureSerialization()
     configureTemplating()

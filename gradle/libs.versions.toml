@@ -10,6 +10,8 @@ liquibase-version = "4.31.1"
 thymeleaf-layout-dialect-version = "3.4.0"
 jsoup-version = "1.20.1"
 mockk-version = "1.14.2"
+cohort-version = "2.7.2"
+cohort-core-version = "2.3.1"
 
 [libraries]
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor-version" }
@@ -32,6 +34,11 @@ jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup-version" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-version" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
+cohort-ktor = { module = "com.sksamuel.cohort:cohort-ktor", version.ref = "cohort-version" }
+cohort-core = { module = "com.sksamuel.cohort:cohort-core", version.ref = "cohort-core-version" }
+cohort-hikari = { module = "com.sksamuel.cohort:cohort-hikari", version.ref = "cohort-version" }
+cohort-liquibase = { module = "com.sksamuel.cohort:cohort-liquibase", version.ref = "cohort-version" }
+cohort-logback = { module = "com.sksamuel.cohort:cohort-logback", version.ref = "cohort-version" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }

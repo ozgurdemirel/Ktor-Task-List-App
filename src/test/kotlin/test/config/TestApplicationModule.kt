@@ -14,7 +14,7 @@ import io.ktor.server.application.*
 fun Application.testModule() {
     // Initialize database with hardcoded test configuration
     val testDbConfig = DatabaseConfig(
-        environment = "test",
+        environment = "development",
         test = DbProperties(
             jdbcUrl = "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false",
             driver = "org.h2.Driver",
