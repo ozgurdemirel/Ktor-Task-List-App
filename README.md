@@ -32,9 +32,9 @@ The main technologies used in this project are:
 * **[Ktor](https://ktor.io/):** An asynchronous and lightweight web framework.
 * **[Gradle](https://gradle.org/):** The build automation tool used for dependency management and build processes.
 * **[Liquibase](https://www.liquibase.org/):** An open-source tool used for managing and versioning database schema changes.
-* **[Likely] Database:** A database suited to the project's needs, such as **H2**, **PostgreSQL**, **MySQL**, etc.
-* **[Likely] Database Access:** A library/technology like **[Exposed](https://github.com/JetBrains/Exposed)** or **JDBC**.
-* **[Likely] JSON Serialization:** A library like **[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)** or **Jackson** for API usage.
+* **Database:** A database suited to the project's needs, such as **H2**, **PostgreSQL**, **MySQL**, etc.
+* **Database Access:** A library/technology like **[Exposed](https://github.com/JetBrains/Exposed)** or **JDBC**.
+* **JSON Serialization:** A library like **[kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization)** or **Jackson** for API usage.
 
 ## 💾 Database Management: Liquibase Integration
 
@@ -121,7 +121,7 @@ The basic directory structure of the project is generally as follows:
 * `src/main/resources`: Holds configuration files (`application.conf`), Liquibase `changelog` files (`db/changelog/`), static files (CSS, JS - if any), HTML templates (if used), etc.
 * `build.gradle.kts` (or `build.gradle`): The Gradle file defining project dependencies, plugins (Ktor, Liquibase, etc.), and build settings.
 
-## 🔌 API Endpoints (If API Focused)
+## 🔌 API Endpoints
 
 If the project primarily offers a REST API, likely endpoints might include:
 
