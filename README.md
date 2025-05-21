@@ -1,4 +1,4 @@
-# Task List App with Ktor 🚀
+# Task List App with Ktor
 
 This project is an educational example demonstrating how to develop a simple task list (to-do list) application with CRUD (Create, Read, Update, Delete) functionality using the [Ktor](https://ktor.io/) web framework. It combines the power of the Kotlin language and the flexibility of Ktor, designed for those looking to get started with building modern web applications or APIs. It also demonstrates how to manage database schema using [Liquibase](https://www.liquibase.org/) integration.
 
@@ -6,7 +6,7 @@ This project is an educational example demonstrating how to develop a simple tas
 
 This application allows users to add tasks, view existing tasks, update them, and delete them. Its main purpose is to explain the fundamental concepts of Ktor (Routing, Request/Response Handling, Content Negotiation, etc.) and how to structure a simple web application or RESTful API through a practical example. Database schema changes are managed using Liquibase.
 
-## 🎯 Purpose and Target Audience
+## 🎯 Purpose
 
 The main goals of this project are:
 
@@ -64,7 +64,7 @@ When the application starts (or the relevant Gradle task is executed), Liquibase
 
 *(Depending on the application structure, it might offer an HTML interface or only API endpoints.)*
 
-## 🚀 Setup and Running
+## Setup and Running
 
 You can follow these steps to run the project on your local machine:
 
