@@ -16,14 +16,6 @@ The main goals of this project are:
 4.  **Database Schema Management:** To show how to version and manage database changes alongside code using Liquibase.
 5.  **Basic Web Application Flow:** To understand the process from receiving a web request to processing it and returning a response, specifically within Ktor.
 
-**Target Audience:**
-
-* Developers new to learning Ktor.
-* Individuals interested in web development with Kotlin.
-* Anyone looking for a simple REST API example.
-* Developers wanting to learn tools like Liquibase for database schema management.
-* Students and developers aiming to understand the fundamental principles of web frameworks.
-
 ## 🛠️ Technologies Used
 
 The main technologies used in this project are:
